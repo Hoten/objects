@@ -5,13 +5,37 @@
 	and a makeNoise property that prints out their noise.
 */
 
-var dog;
+var dog = {
+    name: "dog",
+    noise: "Woof",
+    makeNoise: function(sound) {
+        console.log(sound);
+    }
+};
 
-var cat;
+var cat = {
+    name: "cat",
+    noise: "Meow",
+    makeNoise: function(sound) {
+        console.log(sound);
+    }
+};
 
-var bird;
+var bird = {
+    name: "bird",
+    noise: "Tweet",
+    makeNoise: function(sound) {
+        console.log(sound);
+    }
+};
 
-var mouse;
+var mouse = {
+    name: "mouse",
+    noise: "Squeek",
+    makeNoise: function(sound) {
+        console.log(sound);
+    }
+};
 
 /*
 	Part 2: Let's use an array to hold all of these animals.
@@ -22,7 +46,10 @@ var mouse;
 	Hint: Use the makeNoise() function for each animal in the array
 */
 
-var animals = []; // replace "[]"
+var animals = [dog, cat, bird, mouse]; // replace "[]"
+for (i = 0; i < animals.length; i++) {
+    animals[i].makeNoise(animals[i].noise);
+}
 
 // loop thru animals
 //	for each, call the function "makeNoise". Use dot notation.
@@ -38,30 +65,31 @@ var animals = []; // replace "[]"
 	myObject['newPropertyName'] = newValue;
 */
 
-// your code here
+for (i = 0; i < animals.length; i++) {
+    animals[i].hunger = 8;
+}
 
 /*
 	Part 4: These animals should be able to walk. Let's add a new "walk" property to them.
-	
+
 	For each animal, the "walk" property should be a function that:
-	
+
 	1) prints out a string that says they are walking
 	2) It should also subtract 1 from their "hunger" property
 
 	For example, if I had a duck that looked like this:
-	
-	
+
+
 
 	Hint: You will need the "this" keyword
 */
 
-var dog = {
-	name: 'dog',
-	hunger: 8,
-	walk: function() {
-	    // your code here
-	}
-};
+for (i = 0; i < animals.length; i++) {
+    animals[i].walk = function() {
+        console.log("The dog is walking");
+        this.hunger -= 1;
+    };
+}
 
 dog.walk(); // prints "dog took a walk"
 console.log(dog.hunger); // prints 7
@@ -73,18 +101,18 @@ console.log(dog.hunger); // prints 7
 */
 
 var duck = {
-	name: 'duck',
-	friends: []
+    name: 'duck',
+    friends: []
 };
+
 var swan = {
-	name: 'swan',
-	noise: 'chirp quack',
-	friends: []
+    name: 'swan',
+    noise: 'chirp quack',
+    friends: []
 };
 
 var makeFriend = function(newFriend) {
-	// your code here
-	// hint: use the 'this' keyword
+    this.friends.push(newFriend);
 };
 
 duck.makeFriend = makeFriend;
@@ -92,18 +120,28 @@ swan.makeFriend = makeFriend;
 
 duck.makeFriend(swan);
 console.log(duck.friends); // prints [{ name: 'swan' }]
-console.log(duck.friends[0].name);  // prints 'swan'
+console.log(duck.friends[0].name); // prints 'swan'
 
 /* BONUS
 This bonus will be a challenge! To complete this step, you'll need to do some Googling to look up things that have not yet been covered.
+*/
 
+for (i = 0; i < animals.length; i++) {
+    animals[i].appear = function() {
+        document.querySelector(`img`).setAttribute(`src`, `images/` + this.name + `.jpg`);
+    };
+}
+
+dog.appear();
+
+/*
 Take a look at the index.html file. You'll notice the following code:
 
 	<img src="">
-	
-Here we have an image without a src attribute. 
 
-Now take a peek inside the images folder to see what images are there. 
+Here we have an image without a src attribute.
+
+Now take a peek inside the images folder to see what images are there.
 
 Here are the image paths for reference:
 
@@ -128,4 +166,3 @@ Hint #2: You'll need to use the this keyword to access the name of the current a
 Hint #3: Still stuck? The code to update the image source should look like this:
 	document.querySelector('img').setAttribute('src', 'images/' + this.name + '.jpg');
 */
-	
